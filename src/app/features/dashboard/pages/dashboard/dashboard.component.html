@@ -1,2 +1,20 @@
-<h1>Dashboard</h1>
-<p>Usuário autenticado 🎉</p>
+<div class="container">
+  <h1>Dashboard</h1>
+
+  <div class="cards">
+    <div class="card">
+      <h3>Em aberto</h3>
+      <p>{{ stats.open }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Em andamento</h3>
+      <p>{{ stats.in_progress }}</p>
+    </div>
+
+    <div class="card">
+      <h3>Concluídos</h3>
+      <p>{{ stats.done }}</p>
+    </div>
+  </div>
+</div>
