@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../../core/services/auth.service';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,13 +14,21 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
+  ngOnInit() {
+    if (this.authService.getToken()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
+  
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
       next: (response) => {
         this.authService.saveToken(response.token);
-        console.log('Login realizado com sucesso');
+
+        // 🔥 REDIRECIONA
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.error('Erro no login', err);
