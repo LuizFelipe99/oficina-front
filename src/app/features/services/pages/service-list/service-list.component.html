@@ -3,54 +3,60 @@
 </div>
 <div class="filters">
 
-    <select [(ngModel)]="filters.status">
-        <option value="">Todos</option>
-        <option value="open">Em aberto</option>
-        <option value="in_progress">Em andamento</option>
-        <option value="done">Concluído</option>
-    </select>
+  <select [(ngModel)]="filters.status">
+    <option value="">Todos</option>
+    <option value="open">Em aberto</option>
+    <option value="in_progress">Em andamento</option>
+    <option value="done">Concluído</option>
+  </select>
 
-    <input type="number" placeholder="ID do veículo" [(ngModel)]="filters.vehicle_id" />
+  <select [(ngModel)]="filters.vehicle_id" (change)="loadServices()">
+    <option value="">Todos os veículos</option>
 
-    <button (click)="loadServices()">Filtrar</button>
+    <option *ngFor="let vehicle of vehicles" [value]="vehicle.id">
+      {{ vehicle.id }} - {{ vehicle.name || vehicle.model }}
+    </option>
+  </select>
+
+  <button (click)="loadServices()">Filtrar</button>
 
 </div>
 
 <h2>Serviços</h2>
 
 <table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Descrição</th>
-            <th>Status</th>
-            <th>Preço</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descrição</th>
+      <th>Status</th>
+      <th>Preço</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
 
-    <tbody>
-        <tr *ngFor="let service of services">
-            <td>{{ service.id }}</td>
-            <td>{{ service.description }}</td>
-            <td>{{ service.status }}</td>
-            <td>{{ service.price }}</td>
-            <td>
-            <span class="badge" [ngClass]="getStatusClass(service.status)">
-                {{ getStatusLabel(service.status) }}
-            </span>
-            </td>
-                    </tr>
-    </tbody>
+  <tbody>
+    <tr *ngFor="let service of services">
+      <td>{{ service.id }}</td>
+      <td>{{ service.description }}</td>
+      <td>{{ service.status }}</td>
+      <td>{{ service.price }}</td>
+      <td>
+        <span class="badge" [ngClass]="getStatusClass(service.status)">
+          {{ getStatusLabel(service.status) }}
+        </span>
+      </td>
+    </tr>
+  </tbody>
 </table>
 <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage === 1">
-        Anterior
-    </button>
+  <button (click)="prevPage()" [disabled]="currentPage === 1">
+    Anterior
+  </button>
 
-    <span>Página {{ currentPage }} de {{ lastPage }}</span>
+  <span>Página {{ currentPage }} de {{ lastPage }}</span>
 
-    <button (click)="nextPage()" [disabled]="currentPage === lastPage">
-        Próxima
-    </button>
+  <button (click)="nextPage()" [disabled]="currentPage === lastPage">
+    Próxima
+  </button>
 </div>

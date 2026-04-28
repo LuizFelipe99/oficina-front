@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServiceService } from '../../services/service.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { VehicleService } from '../../../vehicles/services/vehicle.service';
 
 @Component({
   selector: 'app-service-list',
@@ -21,11 +22,15 @@ export class ServiceListComponent implements OnInit {
   message = '';
 
   services: any[] = [];
+  vehicles: any[] = [];
 
-  constructor(private serviceService: ServiceService) { }
+  constructor(private serviceService: ServiceService, private vehicleService: VehicleService) { }
 
   ngOnInit() {
     this.loadServices();
+    this.vehicleService.getAll().subscribe(response => {
+      this.vehicles = response.data;
+    });
   }
 
   loadServices() {
@@ -87,7 +92,7 @@ export class ServiceListComponent implements OnInit {
       next: () => {
         this.loadingId = null;
         this.loadServices();
-         this.message = 'Serviço finalizado com sucesso';
+        this.message = 'Serviço finalizado com sucesso';
 
       },
       error: () => {
@@ -98,23 +103,23 @@ export class ServiceListComponent implements OnInit {
   }
 
   getStatusClass(status: string) {
-  return {
-    'badge-open': status === 'open',
-    'badge-progress': status === 'in_progress',
-    'badge-done': status === 'done'
-  };
-}
-
-getStatusLabel(status: string) {
-  switch (status) {
-    case 'open':
-      return 'Em aberto';
-    case 'in_progress':
-      return 'Em andamento';
-    case 'done':
-      return 'Concluído';
-    default:
-      return status;
+    return {
+      'badge-open': status === 'open',
+      'badge-progress': status === 'in_progress',
+      'badge-done': status === 'done'
+    };
   }
-}
+
+  getStatusLabel(status: string) {
+    switch (status) {
+      case 'open':
+        return 'Em aberto';
+      case 'in_progress':
+        return 'Em andamento';
+      case 'done':
+        return 'Concluído';
+      default:
+        return status;
+    }
+  }
 }
