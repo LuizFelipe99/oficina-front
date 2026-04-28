@@ -13,3 +13,15 @@ th, td {
 th {
   background-color: #f4f4f4;
 }
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.pagination {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}

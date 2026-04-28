@@ -1,3 +1,22 @@
+<div class="filters">
+
+  <select [(ngModel)]="filters.status">
+    <option value="">Todos</option>
+    <option value="open">Em aberto</option>
+    <option value="in_progress">Em andamento</option>
+    <option value="done">Concluído</option>
+  </select>
+
+  <input
+    type="number"
+    placeholder="ID do veículo"
+    [(ngModel)]="filters.vehicle_id"
+  />
+
+  <button (click)="loadServices()">Filtrar</button>
+
+</div>
+
 <h2>Serviços</h2>
 
 <table>
@@ -19,3 +38,14 @@
     </tr>
   </tbody>
 </table>
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">
+    Anterior
+  </button>
+
+  <span>Página {{ currentPage }} de {{ lastPage }}</span>
+
+  <button (click)="nextPage()" [disabled]="currentPage === lastPage">
+    Próxima
+  </button>
+</div>

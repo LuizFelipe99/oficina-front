@@ -11,7 +11,11 @@ export class ServiceService {
 
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<any> {
-    return this.http.get<any>(this.apiUrl);
+  getAll(filters: any = {}): Observable<any> {
+    return this.http.get<any>(this.apiUrl, {
+      params: filters
+    });
   }
+
+  
 }
