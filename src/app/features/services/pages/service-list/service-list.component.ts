@@ -17,6 +17,8 @@ export class ServiceListComponent implements OnInit {
   };
   currentPage = 1;
   lastPage = 1;
+  loadingId: number | null = null;
+  message = '';
 
   services: any[] = [];
 
@@ -49,11 +51,11 @@ export class ServiceListComponent implements OnInit {
   }
 
   prevPage() {
-  if (this.currentPage > 1) {
-    this.currentPage--;
-    this.loadServices();
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadServices();
+    }
   }
-}
 
   nextPage() {
     if (this.currentPage < this.lastPage) {
@@ -63,14 +65,35 @@ export class ServiceListComponent implements OnInit {
   }
 
   start(service: any) {
-  this.serviceService.startService(service.id).subscribe(() => {
-    this.loadServices(); //  recarrega lista
-  });
-}
+    this.loadingId = service.id;
+
+    this.serviceService.startService(service.id).subscribe({
+      next: () => {
+        this.loadingId = null;
+        this.loadServices();
+        this.message = 'Serviço iniciado com sucesso';
+      },
+      error: () => {
+        this.loadingId = null;
+        alert('Erro ao iniciar serviço');
+      }
+    });
+  }
 
   finish(service: any) {
-    this.serviceService.finishService(service.id).subscribe(() => {
-      this.loadServices(); //  recarrega lista
+    this.loadingId = service.id;
+
+    this.serviceService.finishService(service.id).subscribe({
+      next: () => {
+        this.loadingId = null;
+        this.loadServices();
+         this.message = 'Serviço finalizado com sucesso';
+
+      },
+      error: () => {
+        this.loadingId = null;
+        alert('Erro ao finalizar serviço');
+      }
     });
   }
 }

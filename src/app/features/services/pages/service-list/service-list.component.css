@@ -29,3 +29,12 @@ button {
   padding: 6px 10px;
   cursor: pointer;
 }
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}

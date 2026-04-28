@@ -1,3 +1,6 @@
+<div *ngIf="message" class="toast">
+  {{ message }}
+</div>
 <div class="filters">
 
     <select [(ngModel)]="filters.status">
@@ -33,12 +36,14 @@
             <td>{{ service.status }}</td>
             <td>{{ service.price }}</td>
             <td>
-                <button *ngIf="service.status === 'open'" (click)="start(service)">
-                    Iniciar
+                <button *ngIf="service.status === 'open'" (click)="start(service)"
+                    [disabled]="loadingId === service.id">
+                    {{ loadingId === service.id ? 'Iniciando...' : 'Iniciar' }}
                 </button>
 
-                <button *ngIf="service.status === 'in_progress'" (click)="finish(service)">
-                    Finalizar
+                <button *ngIf="service.status === 'in_progress'" (click)="finish(service)"
+                    [disabled]="loadingId === service.id">
+                    {{ loadingId === service.id ? 'Finalizando...' : 'Finalizar' }}
                 </button>
             </td>
         </tr>
