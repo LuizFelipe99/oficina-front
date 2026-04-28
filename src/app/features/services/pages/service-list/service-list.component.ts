@@ -61,4 +61,16 @@ export class ServiceListComponent implements OnInit {
       this.loadServices();
     }
   }
+
+  start(service: any) {
+  this.serviceService.startService(service.id).subscribe(() => {
+    this.loadServices(); //  recarrega lista
+  });
+}
+
+  finish(service: any) {
+    this.serviceService.finishService(service.id).subscribe(() => {
+      this.loadServices(); //  recarrega lista
+    });
+  }
 }

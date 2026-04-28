@@ -9,13 +9,19 @@ export class ServiceService {
 
   private apiUrl = 'http://127.0.0.1:8000/api/services';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(filters: any = {}): Observable<any> {
     return this.http.get<any>(this.apiUrl, {
       params: filters
     });
   }
+  startService(id: number) {
+    return this.http.post(`${this.apiUrl}/${id}/start`, {});
+  }
 
-  
+  finishService(id: number) {
+    return this.http.post(`${this.apiUrl}/${id}/finish`, {});
+  }
+
 }

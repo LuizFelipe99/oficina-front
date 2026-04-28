@@ -1,51 +1,57 @@
 <div class="filters">
 
-  <select [(ngModel)]="filters.status">
-    <option value="">Todos</option>
-    <option value="open">Em aberto</option>
-    <option value="in_progress">Em andamento</option>
-    <option value="done">Concluído</option>
-  </select>
+    <select [(ngModel)]="filters.status">
+        <option value="">Todos</option>
+        <option value="open">Em aberto</option>
+        <option value="in_progress">Em andamento</option>
+        <option value="done">Concluído</option>
+    </select>
 
-  <input
-    type="number"
-    placeholder="ID do veículo"
-    [(ngModel)]="filters.vehicle_id"
-  />
+    <input type="number" placeholder="ID do veículo" [(ngModel)]="filters.vehicle_id" />
 
-  <button (click)="loadServices()">Filtrar</button>
+    <button (click)="loadServices()">Filtrar</button>
 
 </div>
 
 <h2>Serviços</h2>
 
 <table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th>Descrição</th>
-      <th>Status</th>
-      <th>Preço</th>
-    </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Descrição</th>
+            <th>Status</th>
+            <th>Preço</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
 
-  <tbody>
-    <tr *ngFor="let service of services">
-      <td>{{ service.id }}</td>
-      <td>{{ service.description }}</td>
-      <td>{{ service.status }}</td>
-      <td>{{ service.price }}</td>
-    </tr>
-  </tbody>
+    <tbody>
+        <tr *ngFor="let service of services">
+            <td>{{ service.id }}</td>
+            <td>{{ service.description }}</td>
+            <td>{{ service.status }}</td>
+            <td>{{ service.price }}</td>
+            <td>
+                <button *ngIf="service.status === 'open'" (click)="start(service)">
+                    Iniciar
+                </button>
+
+                <button *ngIf="service.status === 'in_progress'" (click)="finish(service)">
+                    Finalizar
+                </button>
+            </td>
+        </tr>
+    </tbody>
 </table>
 <div class="pagination">
-  <button (click)="prevPage()" [disabled]="currentPage === 1">
-    Anterior
-  </button>
+    <button (click)="prevPage()" [disabled]="currentPage === 1">
+        Anterior
+    </button>
 
-  <span>Página {{ currentPage }} de {{ lastPage }}</span>
+    <span>Página {{ currentPage }} de {{ lastPage }}</span>
 
-  <button (click)="nextPage()" [disabled]="currentPage === lastPage">
-    Próxima
-  </button>
+    <button (click)="nextPage()" [disabled]="currentPage === lastPage">
+        Próxima
+    </button>
 </div>

@@ -25,3 +25,7 @@ th {
   gap: 10px;
   align-items: center;
 }
+button {
+  padding: 6px 10px;
+  cursor: pointer;
+}
