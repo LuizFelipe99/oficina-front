@@ -38,3 +38,35 @@ button {
   padding: 10px;
   border-radius: 5px;
 }
+
+.badge {
+  padding: 5px 10px;
+  border-radius: 20px;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+/* status */
+.badge-open {
+  background-color: #3498db;
+}
+
+.badge-progress {
+  background-color: #f39c12;
+}
+
+.badge-done {
+  background-color: #2ecc71;
+}
+
+button {
+  border: none;
+  border-radius: 5px;
+  background: #3498db;
+  color: white;
+}
+
+button:hover {
+  opacity: 0.8;
+}

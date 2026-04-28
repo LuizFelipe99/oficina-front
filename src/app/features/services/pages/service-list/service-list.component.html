@@ -36,17 +36,11 @@
             <td>{{ service.status }}</td>
             <td>{{ service.price }}</td>
             <td>
-                <button *ngIf="service.status === 'open'" (click)="start(service)"
-                    [disabled]="loadingId === service.id">
-                    {{ loadingId === service.id ? 'Iniciando...' : 'Iniciar' }}
-                </button>
-
-                <button *ngIf="service.status === 'in_progress'" (click)="finish(service)"
-                    [disabled]="loadingId === service.id">
-                    {{ loadingId === service.id ? 'Finalizando...' : 'Finalizar' }}
-                </button>
+            <span class="badge" [ngClass]="getStatusClass(service.status)">
+                {{ getStatusLabel(service.status) }}
+            </span>
             </td>
-        </tr>
+                    </tr>
     </tbody>
 </table>
 <div class="pagination">

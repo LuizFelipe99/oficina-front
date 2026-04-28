@@ -96,4 +96,25 @@ export class ServiceListComponent implements OnInit {
       }
     });
   }
+
+  getStatusClass(status: string) {
+  return {
+    'badge-open': status === 'open',
+    'badge-progress': status === 'in_progress',
+    'badge-done': status === 'done'
+  };
+}
+
+getStatusLabel(status: string) {
+  switch (status) {
+    case 'open':
+      return 'Em aberto';
+    case 'in_progress':
+      return 'Em andamento';
+    case 'done':
+      return 'Concluído';
+    default:
+      return status;
+  }
+}
 }
