@@ -1,0 +1,8 @@
+<h2>{{ isEdit ? 'Editar' : 'Novo' }} Cliente</h2>
+
+<form (ngSubmit)="save()">
+  <input [(ngModel)]="client.name" name="name" placeholder="Nome" required />
+  <input [(ngModel)]="client.email" name="email" placeholder="Email" required />
+
+  <button type="submit">Salvar</button>
+</form>

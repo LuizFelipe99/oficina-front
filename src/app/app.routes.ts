@@ -32,5 +32,24 @@ export const routes: Routes = [
         pathMatch: 'full'
       }
     ]
+  },
+
+  {
+    path: 'clients',
+    loadComponent: () =>
+      import('./features/clients/pages/client-list/client-list.component')
+        .then(m => m.ClientListComponent)
+  },
+  {
+    path: 'clients/new',
+    loadComponent: () =>
+      import('./features/clients/pages/client-form/client-form.component')
+        .then(m => m.ClientFormComponent)
+  },
+  {
+    path: 'clients/edit/:id',
+    loadComponent: () =>
+      import('./features/clients/pages/client-form/client-form.component')
+        .then(m => m.ClientFormComponent)
   }
 ];
